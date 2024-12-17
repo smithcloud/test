@@ -1,0 +1,219 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: champions
+  namespace: dev
+  labels:
+    app: champions
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: champions
+  template:
+    metadata:
+      labels:
+        app: champions
+    spec:
+      containers:
+        - name: champions-container
+          image: 226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/dev:champions
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: username
+                  optional: false 
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: password
+                  optional: false 
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: host
+                  optional: false 
+            - name: MYSQL_DB
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: db
+                  optional: false 
+            - name: MYSQL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: port
+                  optional: false 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: images
+  namespace: dev
+  labels:
+    app: images
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: images
+  template:
+    metadata:
+      labels:
+        app: images
+    spec:
+      containers:
+        - name: images-container
+          image: 226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/dev:images
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: username
+                  optional: false 
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: password
+                  optional: false 
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: host
+                  optional: false 
+            - name: MYSQL_DB
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: db
+                  optional: false 
+            - name: MYSQL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: port
+                  optional: false 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matches
+  namespace: dev
+  labels:
+    app: matches
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: matches
+  template:
+    metadata:
+      labels:
+        app: matches
+    spec:
+      containers:
+        - name: matches-container
+          image: 226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/dev:matches
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: username
+                  optional: false 
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: password
+                  optional: false 
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: host
+                  optional: false 
+            - name: MYSQL_DB
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: db
+                  optional: false 
+            - name: MYSQL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: port
+                  optional: false 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: players
+  namespace: dev
+  labels:
+    app: players
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: players
+  template:
+    metadata:
+      labels:
+        app: players
+    spec:
+      containers:
+        - name: players-container
+          image: 226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/dev:players
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: username
+                  optional: false 
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: password
+                  optional: false 
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: host
+                  optional: false 
+            - name: MYSQL_DB
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: db
+                  optional: false 
+            - name: MYSQL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: secret-basic-auth
+                  key: port
+                  optional: false 

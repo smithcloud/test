@@ -1,0 +1,54 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.ingress.namespace }}
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /champions
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.champions.name }}-svc
+                port:
+                  number: {{ .Values.championsservice.port }}
+          - path: /images
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.images.name }}-svc
+                port:
+                  number: {{ .Values.imagesservice.port }}
+          - path: /matches
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.matches.name }}-svc
+                port:
+                  number: {{ .Values.matchesservice.port }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.matches.name }}-svc
+                port:
+                  number: {{ .Values.matchesservice.port }}
+          - path: /player-stats
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.players.name }}-svc
+                port:
+                  number: {{ .Values.playersservice.port }}
+          - path: /players
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.players.name }}-svc
+                port:
+                  number: {{ .Values.playersservice.port }}
