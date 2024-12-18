@@ -1,0 +1,100 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ .Values.httproute.name }}
+  namespace: {{ .Values.httproute.namespace }}
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+spec:
+  parentRefs:
+  - name: {{ .Values.gateway.name }}
+    namespace: {{ .Values.gateway.namespace }}
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /champions
+    backendRefs:
+      - name: {{ .Values.champions.name }}-svc
+        port: {{ .Values.championsservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /healthcheck
+    backendRefs:
+      - name: {{ .Values.champions.name }}-svc
+        port: {{ .Values.championsservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /images
+    backendRefs:
+      - name: {{ .Values.images.name }}-svc
+        port: {{ .Values.imagesservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /healthcheck
+    backendRefs:
+      - name: {{ .Values.images.name }}-svc
+        port: {{ .Values.imagesservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /add_players_to_match
+    backendRefs:
+      - name: {{ .Values.matches.name }}-svc
+        port: {{ .Values.matchesservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /matches
+    backendRefs:
+      - name: {{ .Values.matches.name }}-svc
+        port: {{ .Values.matchesservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /create_match
+    backendRefs:
+      - name: {{ .Values.matches.name }}-svc
+        port: {{ .Values.matchesservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /healthcheck
+    backendRefs:
+      - name: {{ .Values.matches.name }}-svc
+        port: {{ .Values.matchesservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /player-stats
+    backendRefs:
+      - name: {{ .Values.players.name }}-svc
+        port: {{ .Values.playersservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /players
+    backendRefs:
+      - name: {{ .Values.players.name }}-svc
+        port: {{ .Values.playersservice.port }}
+        kind: Service
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /healthcheck
+    backendRefs:
+      - name: {{ .Values.players.name }}-svc
+        port: {{ .Values.playersservice.port }}
+        kind: Service

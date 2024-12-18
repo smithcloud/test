@@ -1,0 +1,69 @@
+.match-details {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+.team {
+  flex: 1;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.blue-team {
+  background-color: rgba(0, 0, 255, 0.1);
+}
+
+.red-team {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.team h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.team-players {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player-card {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.role {
+  font-weight: bold;
+  color: #666;
+}
+
+.champion {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.match-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 20px;
+  background: white;
+}

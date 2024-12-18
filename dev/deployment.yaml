@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-kubernetes-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+     app: react-kubernetes-app
+  template:
+    metadata:
+      labels:
+        app: react-kubernetes-app
+    spec:
+      containers:
+      - name: react-kubernetes-app
+        image: 226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/riotgames-frontend:match_history
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80

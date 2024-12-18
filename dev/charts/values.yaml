@@ -1,0 +1,93 @@
+global:
+  mysql:
+    username: "username"
+    password: "password"
+    host: "host"
+    db: "db"
+    port: "port"
+
+name: riotgames-db-secrets
+namespace: prod
+type: kubernetes.io/basic-auth
+username: username
+password: password
+host: host
+db: db
+port: '4406'
+
+champions:
+  name: champions
+  namespace: prod
+  image: "226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/riotgames-backend:champions"
+  replicas: 2
+  port: 8000
+
+images:
+  name: images
+  namespace: prod
+  image: "226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/riotgames-backend:images"
+  replicas: 2
+  port: 8000
+matches:
+  name: matches
+  namespace: prod
+  image: "226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/riotgames-backend:matches"
+  replicas: 2
+  port: 8000
+
+players:
+  name: players
+  namespace: prod
+  image: "226347592148.dkr.ecr.ap-northeast-2.amazonaws.com/riotgames-backend:players"
+  replicas: 2
+  port: 8000
+
+championsservice:
+  protocol: TCP 
+  port: 80
+
+imagesservice:
+  protocol: TCP 
+  port: 80
+
+matchesservice:
+  protocol: TCP 
+  port: 80
+
+playersservice:
+  protocol: TCP 
+  port: 80
+
+gatewayclass:
+  name: kong-class
+  annotations: {
+  konghq.com/gatewayclass-unmanaged: 'true'
+  }
+
+gateway:
+  name: kong-gateway
+  namespace: kong
+  port: 80
+  protocol: HTTP
+  from: All
+
+httproute:
+  name: kong-httproute
+  namespace: prod
+  annotations: {
+  konghq.com/strip-path: 'false'
+  }
+
+ingress:
+  name: riotgames-backend-ingress
+  namespace: kong
+  annotations: {
+  alb.ingress.kubernetes.io/backend-protocol: 'HTTP',
+  alb.ingress.kubernetes.io/healthcheck-path: '/healthcheck',
+  alb.ingress.kubernetes.io/load-balancer-name: 'riotgames-backend-alb',
+  alb.ingress.kubernetes.io/scheme: 'internet-facing',
+  alb.ingress.kubernetes.io/target-type: 'ip',
+  kubernetes.io/ingress.class: 'alb'
+  }
+  name: kong-gateway-proxy
+  number: 80
