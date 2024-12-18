@@ -1,8 +1,0 @@
-fastapi==0.95.2
-uvicorn==0.22.0
-pydantic==1.10.7
-mysql-connector-python==8.0.33
-python-dotenv==1.0.0
-
-# Add CORS middleware library
-fastapi-middleware==0.1.0
